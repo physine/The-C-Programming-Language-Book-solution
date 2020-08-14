@@ -1,0 +1,119 @@
+# include <stdio.h>
+
+# define MAXLINE 1000
+
+char line[MAXLINE];
+
+int gettline(void){
+	extern char line[];
+
+	int index, c;
+	for(index=0; index<999
+				&& (c = getchar()) != EOF && c != '\n'; ++index){
+		line[index] = c;
+	}
+	if(c == '\n'){
+		line[index] = c;
+		++index;
+	}
+	line[index] = '\0';
+	return index;
+}
+void removeTrailingSpace(void){
+	
+	extern char line[];
+	int newLineFlag;
+
+	int nullend; 
+	for(nullend=0; line[nullend]!='\0'; ++nullend)
+		;
+
+	
+	if(line[0]=='\n' && line[1]=='\0'){
+		line[0] = '\0';
+	}
+	else{
+		if(line[nullend-1]=='\n')
+			newLineFlag = 1;
+
+		for(int index=nullend-1; 
+			line[index]=='\t' || line[index]==' ' || line[index]=='\n'; --index){
+			line[index] = '\0';
+		}
+		if(newLineFlag==1)
+			for(nullend=0; line[nullend]!='\0'; ++nullend)
+				;
+			line[nullend] 	= '\n';
+			line[nullend+1] = '\0';
+	}
+}
+int main(void){
+	int len, nullend;
+	while((len = gettline()) > 0){
+		removeTrailingSpace();
+		for(nullend=0; line[nullend]!='\0'; ++nullend)
+				;
+		for(int index=0; index<nullend; ++index){
+			printf("%c", line[index]);
+		}
+	}
+}# include <stdio.h>
+
+int main(void){
+	int len, c;
+
+	int exitingMulti = 0;
+	int multiLine  	 = 0;
+	int singleLine 	 = 0;
+
+						set multiLine=2 and singleLine1	
+		-- out comment and not entering 			(multiLine==1 || singleLine==1) && (c!='/' || c!='*') 		set multiLine=0 and singleLine=0 and print / and c
+
+		IN
+		-- in singleLine comment and exiting 	 	(multiLine==0 && singleLine==2) && c=='\n' 					set singleLine=0 and print the '\n' 
+
+		-- in multiLine comment possibly exiting 	(multiLine==2 && singleLine==0) && exitingMulti=0 && c=='*' set exitingMulti=1
+		-- in multiLine comment exiting 			exitingMulti=1 && c=='/' 									set exitingMulti=0 and multiLine=0
+		-- in multiLine comment and not exiting 	exitingMulti=1 && c!='/'									set exitingMulti=0 
+
+	*/
+
+	while((c = getchar()) != EOF){
+		
+		if((multiLine==0 && singleLine==0) && c!='/'){
+			putchar(c);
+		}
+		else if((multiLine==0 && singleLine==0) && c=='/'){
+			multiLine  = 1;
+			singleLine = 1;
+		}
+		else if((multiLine==1 && singleLine==1) && c=='/'){
+			multiLine  = 0;
+			singleLine = 2;
+		}
+		else if((multiLine==1 && singleLine==1) && c=='*'){
+			multiLine  = 2;
+			singleLine = 0;
+		}
+		else if((multiLine==1 || singleLine==1) && (c!='/' || c!='*')){
+			multiLine  = 0;
+			singleLine = 0;
+			putchar('/');
+			putchar(c);
+		}
+		else if((multiLine==0 && singleLine==2) && c=='\n'){
+			singleLine = 0;
+			putchar('\n');
+		}
+		else if((multiLine==2 && singleLine==0) && exitingMulti==0 && c=='*'){
+			exitingMulti = 1;
+		}
+		else if(exitingMulti==1 && c=='/'){
+			exitingMulti = 0;
+			multiLine 	 = 0;
+		}
+		else if(exitingMulti==1 && c!='/'){
+			multiLine = 0;
+		}
+	}
+}
