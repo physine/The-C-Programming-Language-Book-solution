@@ -1,0 +1,58 @@
+
+	
+/* WRONG: recorce the frequance of each world from input */
+
+/* THIS SHOUND PRINT A HISTAGRAM OF THE LENGTHS OF THE WORDS FROM INPUT */
+
+/*
+
+# defind IN 1
+# define OUT 0
+
+int state;
+
+int wordList[600];
+int currnetWord[20];
+
+*/
+
+while((c = getchar()) != EOF){
+	
+	if(/* firstchar */){
+		/* set firstchar to 0 */
+		if(/* char is '\n' '\t' ' ' */){
+			/* set state out */
+		}
+		else{
+			/* set state in */
+		}
+
+
+	}
+
+	if(/* in word */){
+
+		if(/* next char is not '\n' '\t' or ' ' */){
+			/* add char to currnet word */
+		}	
+		else{
+			/* set state to out */
+			/* the word has ended, cheak if the current word is in the word list */
+			if(/* is in word list */){
+				/* increment its frequancy */
+			}
+			else{
+				/* is not in word list */
+				/* add it to word list */
+			}
+		}
+	}
+	else{
+		/* out of word */
+		if(/* char '\n' '\t' ' ' */){
+
+		}
+
+	}
+
+}
